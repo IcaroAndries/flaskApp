@@ -1,11 +1,12 @@
-from flask import Flask
-from flask_restful import Api
-from control.interfaces.principal import pesquisa
+from flask import Flask, render_template
+from markupsafe import escape
 
 app = Flask(__name__)
-api = Api(app)
 
-api.add_resource(pesquisa, '/pesquisa/<string:id>')
+@app.route('/')
+def index():
+    return render_template('views/hello.html')
 
-if __name__ == '__main__':
-    app.run(debug=True)
+@app.route('/<page>')
+def hello_world(page):
+    return f"Hello, {escape('teste')}"
